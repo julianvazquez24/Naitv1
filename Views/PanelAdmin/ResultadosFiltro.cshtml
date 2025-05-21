@@ -18,15 +18,17 @@
             <div class="alert alert-info">@ViewBag.Mensaje</div>
         }
 
-        <h5>Ciudad: @ViewBag.Ciudad | Desde: @ViewBag.FechaDesde | Hasta: @ViewBag.FechaHasta</h5>
+        <h5>Ciudad - @ViewBag.Ciudad | FechaInicio - @ViewBag.FechaDesde | FechaFin - @ViewBag.FechaHasta</h5>
 
         <canvas id="lineChart"></canvas>
         <canvas id="barChart" class="mt-5"></canvas>
 
+        //mapa filtrado por ciudad
         <div id="containerMapa">
             <div id="map" style="z-index:1"></div>
         </div>
 
+        //javascript para cargar el mapa - y abajo scripts para cargar los graficos
         <script type="text/javascript">
             const ACTIVIDADES = @Html.Raw(Json.Serialize(ViewBag.actividades));
             const ES_ADMIN = @Html.Raw(Json.Serialize(ViewBag.esAdmin));

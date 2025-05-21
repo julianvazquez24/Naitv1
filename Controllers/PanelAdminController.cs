@@ -41,9 +41,9 @@ namespace Naitv1.Controllers
 
             try
             {
-                var data = _servicioDashboard.ObtenerMetricsFiltrado(filtro.Ciudad, filtro.FechaInicio, filtro.FechaFin);
+                var datosMetrics = _servicioDashboard.ObtenerMetricsFiltrado(filtro.Ciudad, filtro.FechaInicio, filtro.FechaFin);
 
-                if (data.PorHora.Sum(x => x.Cantidad) == 0 && data.PorCiudad.Sum(x => x.Cantidad) == 0)
+                if (datosMetrics.PorHora.Sum(x => x.Cantidad) == 0 && datosMetrics.PorCiudad.Sum(x => x.Cantidad) == 0)
                 {
                     ViewBag.Mensaje = "No hay datos para este filtro";
                 }
@@ -73,7 +73,7 @@ namespace Naitv1.Controllers
                     }
                 }
 
-                return View("ResultadosFiltro", data); 
+                return View("ResultadosFiltro", datosMetrics); 
             }
             catch (Exception ex)
             {

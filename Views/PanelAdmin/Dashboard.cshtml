@@ -18,7 +18,7 @@
     const datosPorHora = @Html.Raw(Json.Serialize(Model.PorHora));
     const datosPorCiudad = @Html.Raw(Json.Serialize(Model.PorCiudad));
 
-    // Gráfico de líneas: Actividades por hora
+    // grafico actividades por hora
     const ctxLine = document.getElementById('lineChart').getContext('2d');
     const lineChart = new Chart(ctxLine, {
         type: 'line',
@@ -40,7 +40,7 @@
         }
     });
 
-    // Gráfico de barras: Actividades por ciudad
+    // grafico actividades por ciudad
     const ctxBar = document.getElementById('barChart').getContext('2d');
     const barChart = new Chart(ctxBar, {
         type: 'bar',
