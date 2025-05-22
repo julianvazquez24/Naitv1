@@ -12,6 +12,7 @@ namespace Naitv1.Models
         public float Lat { get; set; }
         public float Lon { get; set; }
         public bool Activa { get; set; } = true;
+        public List<HistorialParticipacion> HistorialParticipantes { get; set; } = new List<HistorialParticipacion>();
 
         public static List<string> TiposActividad = new List<string>
         {

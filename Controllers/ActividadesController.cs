@@ -4,6 +4,7 @@ using Naitv1.Models;
 using Naitv1.Data;
 using Naitv1.Helpers;
 using System.Net.Http.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Naitv1.Controllers
 {
@@ -70,8 +71,18 @@ namespace Naitv1.Controllers
             }
 
             _context.SaveChanges();
-
             return RedirectToAction("Index", "Home");
+        }
+
+          public IActionResult UnirUsuarioActividad( int idActividad)
+          {
+            HistorialParticipacion registro = new HistorialParticipacion();
+            registro.IdActividad =idActividad;
+            registro.IdUsuario = UsuarioLogueado.idUsuario(HttpContext.Session);
+
+            _context.HistorialParticipaciones.Add(registro);
+            _context.SaveChanges();
+            return View();
         }
     }
 }

@@ -9,5 +9,8 @@ namespace Naitv1.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string TipoUsuario { get; set; }
+        public List<HistorialParticipacion> HistorialParticipaciones { get; set; } = new List<HistorialParticipacion>();
+
+
     }
 }
