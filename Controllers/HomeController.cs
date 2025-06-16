@@ -28,6 +28,7 @@ namespace Naitv1.Controllers
 
             if (estaLogueado)
             {
+                ViewBag.nombreUsuario = HttpContext.Session.GetString("nombreUsuario") ?? "";
                 ViewBag.esAdmin = UsuarioLogueado.esAdmin(HttpContext.Session);
 
                 if (UsuarioLogueado.esAdmin(HttpContext.Session))

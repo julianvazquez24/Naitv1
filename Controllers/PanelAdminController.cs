@@ -14,8 +14,15 @@ namespace Naitv1.Controllers
 
         public IActionResult Index()
         {
-            DashboardData datos = _servicioDashboard.ObtenerMetrics();
-            return View("Dashboard", datos); 
+            if ( UsuarioLogueado.esAdmin(HttpContext.Session))
+            {
+                DashboardData datos = _servicioDashboard.ObtenerMetrics();
+                return View("Dashboard", datos);
+            }
+            else {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }
