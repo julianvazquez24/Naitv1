@@ -37,6 +37,7 @@ namespace Naitv1.Controllers
                     .ToList();
 
                     ViewBag.actividades = actividades;
+                    ViewBag.BadgeActividades = ObtenerConteoActivas();
                     Console.WriteLine("Actividades activas: " + actividades.Count);
                 }
                 else
@@ -88,5 +89,8 @@ namespace Naitv1.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public int ObtenerConteoActivas() =>
+            _context.Actividades.Count(a => a.Activa == true);
     }
 }
