@@ -22,6 +22,7 @@ namespace Naitv1.Controllers
         public IActionResult Index()
         {
             DashboardData datos = _servicioDashboard.ObtenerMetrics();
+            ViewBag.ActividadesHoy = ObtenerConteoActividadesHoy();
             return View("Dashboard", datos); 
         }
 
@@ -32,6 +33,11 @@ namespace Naitv1.Controllers
             ViewBag.Ciudades = ciudades;
 
             return View();
+        }
+
+        public int ObtenerConteoActividadesHoy()
+        {
+            return _context.Actividades.Count(a => a.FechaCreacion.Date == DateTime.Today);
         }
 
         [HttpPost]
