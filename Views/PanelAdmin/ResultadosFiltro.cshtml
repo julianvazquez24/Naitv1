@@ -19,6 +19,11 @@
         }
 
         <h5>Ciudad - @ViewBag.Ciudad | FechaInicio - @ViewBag.FechaDesde | FechaFin - @ViewBag.FechaHasta</h5>
+        <a class="btn btn-outline-primary mb-3"
+           href="@Url.Action("ExportarCsv", "PanelAdmin", new { ciudad = ViewBag.Ciudad, fechaInicio = ViewBag.FechaDesde, fechaFin = ViewBag.FechaHasta })"
+           target="_blank">
+            Exportar CSV
+        </a>
 
         <canvas id="lineChart"></canvas>
         <canvas id="barChart" class="mt-5"></canvas>

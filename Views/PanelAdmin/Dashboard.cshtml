@@ -19,8 +19,23 @@
     <h2 class="mt-5">Actividades por Ciudad (últimos 7 días)</h2>
     <canvas id="barChart"></canvas>
 </div>
-
-
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ciudad</th>
+            <th style="cursor:pointer;" id="ordenarCantidad">Actividades <span id="flecha">▼</span></th>
+        </tr>
+    </thead>
+    <tbody id="tablaCiudades">
+        @foreach (var item in Model.PorCiudad)
+        {
+            <tr>
+                <td>@item.Ciudad</td>
+                <td>@item.Cantidad</td>
+            </tr>
+        }
+    </tbody>
+</table>
 <script>
     // Datos desde el modelo
     const datosPorHora = @Html.Raw(Json.Serialize(Model.PorHora));
@@ -67,5 +82,27 @@
                 y: { title: { display: true, text: 'Ciudad' } }
             }
         }
+    });
+
+    //tabla ciudades clicable
+    let descendente = true;
+
+    document.getElementById("ordenarCantidad").addEventListener("click", () => {
+        const cuerpo = document.getElementById("tablaCiudades");
+        const filas = Array.from(cuerpo.querySelectorAll("tr"));
+
+        filas.sort((a, b) => {
+            const cantA = parseInt(a.cells[1].innerText);
+            const cantB = parseInt(b.cells[1].innerText);
+            return descendente ? cantB - cantA : cantA - cantB;
+        });
+
+        //vaciar y reordenar tablas
+        cuerpo.innerHTML = "";
+        filas.forEach(f => cuerpo.appendChild(f));
+
+        // cambiar felcha tabla
+        document.getElementById("flecha").innerText = descendente ? "▲" : "▼";
+        descendente = !descendente;
     });
 </script>

@@ -89,5 +89,28 @@ namespace Naitv1.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult ExportarCsv(string ciudad, DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                if ((fechaFin - fechaInicio).TotalDays > 30)
+                    return BadRequest("El rango no puede superar los 30 días.");
+
+                var exportador = new ExportadorDashboard(_context);
+                string contenidoCsv = exportador.GenerarCsv(ciudad, fechaInicio, fechaFin);
+
+                var bytes = System.Text.Encoding.UTF8.GetBytes(contenidoCsv);
+                var nombreArchivo = $"dashboard_{DateTime.Now:yyyyMMddHHmmss}.csv";
+
+                return File(bytes, "text/csv", nombreArchivo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error al generar CSV: " + ex.Message);
+            }
+        }
+
+
     }
 }
